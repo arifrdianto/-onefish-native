@@ -32,8 +32,8 @@ import {
   IPressableProps,
   Text,
   VStack,
-} from './components';
-import { useTheme } from './hooks';
+} from "./components";
+import { useTheme } from "./hooks";
 
 export {
   Badge,
@@ -74,9 +74,10 @@ export type {
   ITextProps,
 };
 
-export * from './core';
-export * from './factory';
-export * from './theme';
+export * from "./core";
+export * from "./components/Icon/Icons";
+export * from "./factory";
+export * from "./theme";
 
-export type { StyledProps } from './theme/types';
-export type { ITheme, ICustomTheme } from './theme';
+export type { StyledProps } from "./theme/types";
+export type { ITheme, ICustomTheme } from "./theme";

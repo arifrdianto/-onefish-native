@@ -8,26 +8,39 @@
  * @format
  */
 
-import React from "react";
-import { SafeAreaView, ScrollView, StatusBar, useColorScheme } from "react-native";
-import { Colors, Header } from "react-native/Libraries/NewAppScreen";
+import React from 'react';
 import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  useColorScheme,
+} from 'react-native';
+import { Colors, Header } from 'react-native/Libraries/NewAppScreen';
+import {
+  Badge,
   Box,
   Button,
+  CheckIcon,
+  Chip,
+  DeleteIcon,
   extendTheme,
   FormControl,
+  HStack,
+  InfoIcon,
   Input,
   InputGroup,
   InputLeftAddon,
   InputRightAddon,
+  SearchIcon,
   Stack,
   Text,
   ThemeProvider,
-} from "./onefish-native";
-import { InfoIcon, SearchIcon, WarningOutlineIcon } from "./components";
+  VStack,
+  WarningOutlineIcon,
+} from './onefish-native';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === "dark";
+  const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -39,20 +52,20 @@ const App = () => {
         fontConfig: {
           Inter: {
             400: {
-              normal: "Inter-Regular",
-              italic: "Inter-Italic",
+              normal: 'Inter-Regular',
+              italic: 'Inter-Italic',
             },
             500: {
-              normal: "Inter-Medium",
-              italic: "Inter-MediumItalic",
+              normal: 'Inter-Medium',
+              italic: 'Inter-MediumItalic',
             },
             600: {
-              normal: "Inter-SemiBold",
-              italic: "Inter-MediumItalic",
+              normal: 'Inter-SemiBold',
+              italic: 'Inter-MediumItalic',
             },
             700: {
-              normal: "Inter-Bold",
-              italic: "Inter-BoldItalic",
+              normal: 'Inter-Bold',
+              italic: 'Inter-BoldItalic',
             },
           },
         },
@@ -63,22 +76,29 @@ const App = () => {
           bold: 700,
         },
         fonts: {
-          heading: "Inter",
-          body: "Inter",
-          mono: "Inter",
+          heading: 'Inter',
+          body: 'Inter',
+          mono: 'Inter',
         },
       })}
     >
       <SafeAreaView style={backgroundStyle}>
         <StatusBar
-          barStyle={isDarkMode ? "light-content" : "dark-content"}
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           backgroundColor={backgroundStyle.backgroundColor}
         />
-        <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={backgroundStyle}
+        >
           <Header />
           <Box bgColor="bg.white">
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Input Variants</Text>
               </Box>
               <Input placeholder="outline (default)" />
@@ -86,7 +106,11 @@ const App = () => {
               <Input variant="rounded" placeholder="rounded" />
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Input Size</Text>
               </Box>
               <Input size="xs" placeholder="xs Input" />
@@ -97,7 +121,11 @@ const App = () => {
               <Input size="2xl" placeholder="2xl Input" />
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Input State</Text>
               </Box>
               <Input placeholder="Enable" />
@@ -105,30 +133,42 @@ const App = () => {
               <Input placeholder="Disable" isDisabled />
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Input Addons</Text>
               </Box>
               <Stack alignItems="center">
                 <InputGroup w="full">
                   <InputLeftAddon children="https://" />
                   <Input flex={1} placeholder="efishery" />
-                  <InputRightAddon children={".ai"} />
+                  <InputRightAddon children={'.ai'} />
                 </InputGroup>
               </Stack>
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Form Control</Text>
               </Box>
 
               <FormControl>
-                <FormControl.Label rightIcon={<InfoIcon size="sm" />}>Form Label</FormControl.Label>
+                <FormControl.Label rightIcon={<InfoIcon size="sm" />}>
+                  Form Label
+                </FormControl.Label>
                 <Input
                   placeholder="Placeholder"
                   leftElement={<SearchIcon size="sm" ml="3" />}
                   rightElement={<WarningOutlineIcon size="sm" mr="3" />}
                 />
-                <FormControl.HelperText leftIcon={<WarningOutlineIcon size="xs" />}>
+                <FormControl.HelperText
+                  leftIcon={<WarningOutlineIcon size="xs" />}
+                >
                   Give your project a title.
                 </FormControl.HelperText>
               </FormControl>
@@ -137,7 +177,9 @@ const App = () => {
                 <FormControl.Label>Form Label</FormControl.Label>
                 <Input placeholder="Placeholder" />
 
-                <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+                <FormControl.ErrorMessage
+                  leftIcon={<WarningOutlineIcon size="xs" />}
+                >
                   Try different from previous passwords.
                 </FormControl.ErrorMessage>
               </FormControl>
@@ -145,11 +187,17 @@ const App = () => {
               <FormControl>
                 <FormControl.Label>Form Label</FormControl.Label>
                 <Input placeholder="Input Disabled" isDisabled />
-                <FormControl.HelperText>Give your project a title.</FormControl.HelperText>
+                <FormControl.HelperText>
+                  Give your project a title.
+                </FormControl.HelperText>
               </FormControl>
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Button Variants</Text>
               </Box>
 
@@ -159,7 +207,11 @@ const App = () => {
               <Button variant="ghost">Ghost</Button>
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Button Colors</Text>
               </Box>
 
@@ -168,7 +220,11 @@ const App = () => {
               <Button colorScheme="caution">Caution</Button>
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Button Sizes</Text>
               </Box>
 
@@ -176,7 +232,11 @@ const App = () => {
               <Button size="lg">Large</Button>
             </Stack>
             <Stack px="8" py="4" space={4}>
-              <Box pb="2" borderBottomWidth="1" borderBottomColor="border.brand">
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
                 <Text fontWeight="semibold">Button State</Text>
               </Box>
 
@@ -185,6 +245,126 @@ const App = () => {
               <Button isLoading isLoadingText="Loading...">
                 Upload
               </Button>
+            </Stack>
+            <Stack px="8" py="4" space={4}>
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
+                <Text fontWeight="semibold">Badge Colors</Text>
+              </Box>
+              <HStack space="4">
+                <VStack space="2">
+                  <Badge variant="solid">Badge</Badge>
+                  <Badge variant="solid" colorScheme="caution">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="critical">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="gray">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="green">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="aqua">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="lightBlue">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="blue">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="orange">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="pink">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="purple">
+                    Badge
+                  </Badge>
+                  <Badge variant="solid" colorScheme="lime">
+                    Badge
+                  </Badge>
+                </VStack>
+                <VStack space="2">
+                  <Badge>Badge</Badge>
+                  <Badge colorScheme="caution">Badge</Badge>
+                  <Badge colorScheme="critical">Badge</Badge>
+                  <Badge colorScheme="gray">Badge</Badge>
+                  <Badge colorScheme="green">Badge</Badge>
+                  <Badge colorScheme="aqua">Badge</Badge>
+                  <Badge colorScheme="lightBlue">Badge</Badge>
+                  <Badge colorScheme="blue">Badge</Badge>
+                  <Badge colorScheme="orange">Badge</Badge>
+                  <Badge colorScheme="pink">Badge</Badge>
+                  <Badge colorScheme="purple">Badge</Badge>
+                  <Badge colorScheme="lime">Badge</Badge>
+                </VStack>
+              </HStack>
+            </Stack>
+            <Stack px="8" py="4" space={4}>
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
+                <Text fontWeight="semibold">Badge Variants</Text>
+              </Box>
+
+              <HStack space="2">
+                <Badge variant="solid">Solid</Badge>
+                <Badge>Subtle</Badge>
+                <Badge variant="outline">Outline</Badge>
+              </HStack>
+            </Stack>
+            <Stack px="8" py="4" space={4}>
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
+                <Text fontWeight="semibold">Badge Dot</Text>
+              </Box>
+
+              <HStack space="2">
+                <Badge variant="solid" dot>
+                  Online
+                </Badge>
+                <Badge dot>Online</Badge>
+              </HStack>
+            </Stack>
+            <Stack px="8" py="4" space={4}>
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
+                <Text fontWeight="semibold">Chip</Text>
+              </Box>
+              <HStack space="4">
+                <Chip>Default</Chip>
+                <Chip isPressed>Active</Chip>
+              </HStack>
+            </Stack>
+            <Stack px="8" py="4" space={4}>
+              <Box
+                pb="2"
+                borderBottomWidth="1"
+                borderBottomColor="border.brand"
+              >
+                <Text fontWeight="semibold">Chip Icon</Text>
+              </Box>
+              <HStack space="4">
+                <Chip leftIcon={<CheckIcon size="sm" />}>Check</Chip>
+                <Chip rightIcon={<DeleteIcon size="sm" />} isPressed>
+                  Gurame
+                </Chip>
+              </HStack>
             </Stack>
           </Box>
         </ScrollView>

@@ -1,4 +1,4 @@
-package com.rnonefish.newarchitecture;
+package com.onefishnative.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.rnonefish.BuildConfig;
-import com.rnonefish.newarchitecture.components.MainComponentsRegistry;
-import com.rnonefish.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.onefishnative.BuildConfig;
+import com.onefishnative.newarchitecture.components.MainComponentsRegistry;
+import com.onefishnative.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

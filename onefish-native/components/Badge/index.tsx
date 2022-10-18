@@ -1,4 +1,4 @@
-import { usePropsResolution } from 'libs/onefish-native/hooks';
+import { usePropsResolution } from '../../hooks';
 import React, { memo, forwardRef } from 'react';
 import Box from '../Box';
 import { HStack } from '../Stack';

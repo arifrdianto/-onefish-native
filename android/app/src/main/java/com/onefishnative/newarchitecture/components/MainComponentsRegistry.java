@@ -1,4 +1,4 @@
-package com.rnonefish.newarchitecture.components;
+package com.onefishnative.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

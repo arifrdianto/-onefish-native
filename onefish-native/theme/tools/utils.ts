@@ -103,19 +103,32 @@ export const stylingProps = {
 
 export type Dict = Record<string, any>;
 
-export const get = (
-  obj: { [x: string]: any },
-  key: any,
-  def: any,
-  p?: any,
-  undef?: any
-) => {
-  key = key && key.split ? key.split('.') : [key];
-  for (p = 0; p < key.length; p++) {
-    obj = obj ? obj[key[p]] : undef;
+/**
+ * Get value from a deeply nested object using a string path.
+ * Memorizes the value.
+ * @param obj - the object
+ * @param path - the string path
+ * @param fallback  - the fallback value
+ *
+ * original https://github.com/chakra-ui/chakra-ui/blob/main/packages/legacy/utils/src/object.ts
+ */
+export function get(
+  obj: Record<string, any>,
+  path: string | number,
+  fallback?: any,
+  index?: number
+) {
+  const key = typeof path === 'string' ? path.split('.') : [path];
+
+  for (index = 0; index < key.length; index += 1) {
+    if (!obj) {
+      break;
+    }
+    obj = obj[key[index]];
   }
-  return obj === undef ? def : obj;
-};
+
+  return obj === undefined ? fallback : obj;
+}
 
 export const merge = (a: { [x: string]: any }, b: { [x: string]: any }) => {
   let result = Object.assign({}, a, b);

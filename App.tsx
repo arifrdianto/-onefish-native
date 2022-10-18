@@ -93,6 +93,13 @@ const App = () => {
         >
           <Header />
           <Box bgColor="bg.white">
+            <Box
+              p={1.5}
+              bg="bg.brand"
+              _text={{ fontWeight: 'semibold', color: 'text.white' }}
+            >
+              OneFish2.0
+            </Box>
             <Stack px="8" py="4" space={4}>
               <Box
                 pb="2"

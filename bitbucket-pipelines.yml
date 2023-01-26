@@ -2,26 +2,26 @@ image: reactnativecommunity/react-native-android
 
 pipelines:
   default:
-    - parallel:
-        - step:
-            name: "Build and Test"
-            script:
-              - echo "Your build and test goes here..."
-        - step:
-            name: "Lint"
-            script:
-              - echo "Your linting goes here..."
-        - step:
-            name: "Security scan"
-            script:
-              - echo "Your security scan goes here..."
+    # - parallel:
+    #     - step:
+    #         name: "Build and Test"
+    #         script:
+    #           - echo "Your build and test goes here..."
+    #     - step:
+    #         name: "Lint"
+    #         script:
+    #           - echo "Your linting goes here..."
+    #     - step:
+    #         name: "Security scan"
+    #         script:
+    #           - echo "Your security scan goes here..."
 
     # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
-    - step:
-        name: "Deployment to Staging"
-        deployment: staging
-        script:
-          - echo "Your deployment to staging script goes here..."
+    # - step:
+    #     name: "Deployment to Staging"
+    #     deployment: staging
+    #     script:
+    #       - echo "Your deployment to staging script goes here..."
     - step:
         name: "Deployment to Production"
         deployment: production
@@ -37,10 +37,10 @@ pipelines:
           - yarn version --prepatch --preid alpha
           - git add *
           - export NEW_VERSION=$(jq -r ".version" package.json)
-          - export TAG="stg-$(NEW_VERSION)"
-          - echo "New tag $tag"
+          - export TAG="stg-$NEW_VERSION"
+          - echo "New tag $TAG"
           - git add *
-          - git commit -m "Update version from $(OLD_VERSION) to $(NEW_VERSION)"
+          - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
           - git tag $TAG
           # - git pull --rebase origin $(Build.SourceBranchName)
           # - git push origin $(Build.SourceBranchName)

@@ -29,7 +29,7 @@ definitions:
           - export NEW_VERSION=$(jq -r ".version" package.json)
           - export TAG="stg-$NEW_VERSION"
           - echo "New tag $TAG"
-          - git add *
+          - git add .
           - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
           - git tag $TAG
           - git pull --rebase origin $BITBUCKET_BRANCH
@@ -49,13 +49,15 @@ pipelines:
           <<: *Lint
   branches:
     main:
-      - parallel:
-          - step:
-              <<: *Lint
-          - step:
-              <<: *Tag
       - step:
-          <<: *Build
-          name: Deploy to Staging
-          deployment: staging
-          trigger: manual
+          <<: *Tag
+      # - parallel:
+      #     - step:
+      #         <<: *Lint
+      #     - step:
+      #         <<: *Tag
+      # - step:
+      #     <<: *Build
+      #     name: Deploy to Staging
+      #     deployment: staging
+      #     trigger: manual

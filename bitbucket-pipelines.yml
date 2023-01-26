@@ -20,13 +20,15 @@ definitions:
           - echo "Your deployment to production script goes here..."
           - apt-get update
           - apt-get -y install jq
-          - echo $BITBUCKET_BUILD_NUMBER
+          - echo $BITBUCKET_BRANCH
+          - export BRANCH=$BITBUCKET_BRANCH
+          - echo "Currently on branch $BRANCH"
           - git checkout chore/ci-pipelines
           - yarn config set version-sign-git-tag false
           - yarn config set version-git-tag false
           - yarn config set version-commit-hooks false
           - export OLD_VERSION=$(jq -r ".version" package.json)
-          - yarn version --prepatch --preid alpha
+          - yarn version --prerelease
           - git add .
           - export NEW_VERSION=$(jq -r ".version" package.json)
           - export TAG="stg-$NEW_VERSION"
@@ -34,7 +36,6 @@ definitions:
           - git add .
           - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
           - git tag $TAG
-          - echo $BITBUCKET_BRANCH
           - git pull --rebase origin chore/ci-pipelines
           - git push origin chore/ci-pipelines
           - git push --tags

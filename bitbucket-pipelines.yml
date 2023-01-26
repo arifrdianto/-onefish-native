@@ -20,6 +20,8 @@ definitions:
           - echo "Your deployment to production script goes here..."
           - apt-get update
           - apt-get -y install jq
+          - echo $BITBUCKET_BUILD_NUMBER
+          - git checkout chore/ci-pipelines
           - yarn config set version-sign-git-tag false
           - yarn config set version-git-tag false
           - yarn config set version-commit-hooks false

@@ -23,8 +23,6 @@ definitions:
           # - apt-get -y install jq
           - apk update
           - apk add jq
-          - export BRANCH="chore/update-version"
-          - git checkout $BRANCH
           - yarn config set version-sign-git-tag false
           - yarn config set version-git-tag false
           - yarn config set version-commit-hooks false
@@ -36,10 +34,9 @@ definitions:
           - echo "New tag $TAG"
           - git add .
           - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
+          - git push
           - git tag $TAG
-          - git pull --rebase origin $BRANCH
-          - git push origin $BRANCH
-          - git push --tags
+          - git push origin --tags
     - step: &Build
         name: "Build"
         caches:

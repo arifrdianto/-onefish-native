@@ -23,7 +23,8 @@ definitions:
           # - apt-get -y install jq
           - apk update
           - apk add jq
-          - git checkout $BITBUCKET_COMMIT
+          - export BRANCH="chore/update-version"
+          - git checkout $BRANCH
           - yarn config set version-sign-git-tag false
           - yarn config set version-git-tag false
           - yarn config set version-commit-hooks false
@@ -36,8 +37,8 @@ definitions:
           - git add .
           - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
           - git tag $TAG
-          - git pull --rebase origin $BITBUCKET_COMMIT
-          - git push
+          - git pull --rebase origin $BRANCH
+          - git push origin $BRANCH
           - git push --tags
     - step: &Build
         name: "Build"

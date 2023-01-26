@@ -1,5 +1,5 @@
 # image: reactnativecommunity/react-native-android
-image: node:alpine
+image: netsynoteam/alpine-node-curl-jq:16.13.2-alpine3.15
 
 definitions:
   caches:

@@ -25,7 +25,7 @@ definitions:
           - yarn config set version-commit-hooks false
           - export OLD_VERSION=$(jq -r ".version" package.json)
           - yarn version --prepatch --preid alpha
-          - git add *
+          - git add .
           - export NEW_VERSION=$(jq -r ".version" package.json)
           - export TAG="stg-$NEW_VERSION"
           - echo "New tag $TAG"

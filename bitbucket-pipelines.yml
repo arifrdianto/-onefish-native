@@ -1,4 +1,5 @@
-image: reactnativecommunity/react-native-android
+# image: reactnativecommunity/react-native-android
+image: node:alpine
 
 definitions:
   caches:
@@ -20,10 +21,7 @@ definitions:
           - echo "Your deployment to production script goes here..."
           - apt-get update
           - apt-get -y install jq
-          - echo $BITBUCKET_BRANCH
-          - export BRANCH=$BITBUCKET_BRANCH
-          - echo "Currently on branch $BRANCH"
-          - git checkout chore/ci-pipelines
+          - git checkout $BITBUCKET_COMMIT
           - yarn config set version-sign-git-tag false
           - yarn config set version-git-tag false
           - yarn config set version-commit-hooks false
@@ -36,8 +34,8 @@ definitions:
           - git add .
           - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
           - git tag $TAG
-          - git pull --rebase origin chore/ci-pipelines
-          - git push origin chore/ci-pipelines
+          - git pull --rebase origin $BITBUCKET_COMMIT
+          - git push origin $BITBUCKET_COMMIT
           - git push --tags
     - step: &Build
         name: "Build"

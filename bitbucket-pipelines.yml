@@ -32,9 +32,9 @@ definitions:
           - git add .
           - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
           - git tag $TAG
-          - echo "$BITBUCKET_BRANCH"
-          - git pull --rebase origin "$BITBUCKET_BRANCH"
-          - git push origin "$BITBUCKET_BRANCH"
+          - echo $BITBUCKET_BRANCH
+          - git pull --rebase origin chore/ci-pipelines
+          - git push origin chore/ci-pipelines
           - git push --tags
     - step: &Build
         name: "Build"

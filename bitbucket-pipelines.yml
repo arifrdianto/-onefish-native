@@ -1,6 +1,8 @@
 image: reactnativecommunity/react-native-android
 
 definitions:
+  caches:
+    yarn: /usr/local/share/.cache/yarn
   steps:
     - step: &Lint
         name: "Lint"

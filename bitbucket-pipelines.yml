@@ -1,47 +1,65 @@
-image: reactnativecommunity/react-native-android
+# image: reactnativecommunity/react-native-android
+image: netsynoteam/alpine-node-curl-jq:16.13.2-alpine3.15
 
-pipelines:
-  default:
-    - parallel:
-        - step:
-            name: "Build and Test"
-            script:
-              - echo "Your build and test goes here..."
-        - step:
-            name: "Lint"
-            script:
-              - echo "Your linting goes here..."
-        - step:
-            name: "Security scan"
-            script:
-              - echo "Your security scan goes here..."
-
-    # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
-    - step:
-        name: "Deployment to Staging"
-        deployment: staging
+definitions:
+  caches:
+    yarn: /usr/local/share/.cache/yarn
+  steps:
+    - step: &Lint
+        name: "Lint"
+        caches:
+          - node
+          - yarn
         script:
-          - echo "Your deployment to staging script goes here..."
-    - step:
-        name: "Deployment to Production"
-        deployment: production
-        trigger: "manual"
+          - echo "Your linting goes here..."
+    - step: &Tag
+        name: "Tagging commit"
+        caches:
+          - node
+          - yarn
         script:
           - echo "Your deployment to production script goes here..."
-          - apt-get update
-          - apt-get -y install jq
+          # - apt-get update
+          # - apt-get -y install jq
+          - apk update
+          - apk add jq
           - yarn config set version-sign-git-tag false
           - yarn config set version-git-tag false
           - yarn config set version-commit-hooks false
           - export OLD_VERSION=$(jq -r ".version" package.json)
-          - yarn version --prepatch --preid alpha
-          - git add *
+          - yarn version --prerelease
+          - git add .
           - export NEW_VERSION=$(jq -r ".version" package.json)
-          - export TAG="stg-$(NEW_VERSION)"
-          - echo "New tag $tag"
-          - git add *
-          - git commit -m "Update version from $(OLD_VERSION) to $(NEW_VERSION)"
+          - export TAG="stg-$NEW_VERSION"
+          - echo "New tag $TAG"
+          - git add .
+          - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
+          - git push
           - git tag $TAG
-          # - git pull --rebase origin $(Build.SourceBranchName)
-          # - git push origin $(Build.SourceBranchName)
-          - git push --tags
+          - git push origin --tags
+    - step: &Build
+        name: "Build"
+        caches:
+          - node
+          - yarn
+        script:
+          - echo "Your build goes here..."
+pipelines:
+  pull-requests:
+    "**":
+      - step:
+          <<: *Lint
+  branches:
+    main:
+      - step:
+          <<: *Tag
+      # - parallel:
+      #     - step:
+      #         <<: *Lint
+      #     - step:
+      #         <<: *Tag
+      # - step:
+      #     <<: *Build
+      #     name: Deploy to Staging
+      #     deployment: staging
+      #     trigger: manual

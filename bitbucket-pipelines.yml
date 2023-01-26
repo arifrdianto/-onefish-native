@@ -1,5 +1,5 @@
 # image: reactnativecommunity/react-native-android
-image: cfmanteiga/alpine-bash-curl-jq:latest
+image: node:alpine
 
 definitions:
   caches:
@@ -21,6 +21,8 @@ definitions:
           - echo "Your deployment to production script goes here..."
           # - apt-get update
           # - apt-get -y install jq
+          - apk update
+          - apk add jq
           - git checkout $BITBUCKET_COMMIT
           - yarn config set version-sign-git-tag false
           - yarn config set version-git-tag false

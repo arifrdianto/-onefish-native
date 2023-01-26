@@ -37,7 +37,7 @@ definitions:
           - git commit -m "Update version from $OLD_VERSION to $NEW_VERSION"
           - git tag $TAG
           - git pull --rebase origin $BITBUCKET_COMMIT
-          - git push origin $BITBUCKET_COMMIT
+          - git push
           - git push --tags
     - step: &Build
         name: "Build"
